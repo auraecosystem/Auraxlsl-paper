@@ -80,7 +80,7 @@ policies.
 
 ## Python API
 
-    from src.xlsl import XLSLDocument, read_xlsl, write_xlsl
+    from xlsl import XLSLDocument, read_xlsl, write_xlsl
 
     document = XLSLDocument(
         workbook={
