@@ -58,7 +58,7 @@ def _decode_json(payload: bytes, member_name: str) -> dict[str, Any]:
 def _validate_member_name(name: str) -> None:
     if not name or "\\" in name or name.startswith("/"):
         raise XLSLFormatError(f"Unsafe archive member path: {name!r}")
-    if any(part in ("", ".", "..") for part in PurePosixPath(name).parts):
+    if any(part in ("", ".", "..") for part in name.split("/")):
         raise XLSLFormatError(f"Unsafe archive member path: {name!r}")
 
 
