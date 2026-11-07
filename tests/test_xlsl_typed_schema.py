@@ -70,7 +70,7 @@ class XLSLTypedSchemaTests(unittest.TestCase):
 
     def test_rejects_unsupported_schema_version(self):
         workbook = self.valid_workbook()
-        workbook["schema_version"] = 2
+        workbook["schema_version"] = 3
         valid, report = validate_workbook(workbook)
         self.assertFalse(valid)
         self.assertIn("schema_version", report["errors"][0])
