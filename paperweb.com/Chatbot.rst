@@ -1,15 +1,16 @@
-# Delete chatbot icon
+> # Delete chatbot icon
 Source: https://chatbase.co/docs/api-reference/assets/delete-chatbot-icon
 
-openapi.yaml delete /delete-chatbot-icon
+> openapi.yaml delete /delete-chatbot-icon
 Deletes the chatbot's icon image
 
 
 
-# Delete chatbot profile picture
+
+> # Delete chatbot profile picture
 Source: https://chatbase.co/docs/api-reference/assets/delete-chatbot-profile-picture
 
-openapi.yaml delete /delete-chatbot-profile-picture
+> openapi.yaml delete /delete-chatbot-profile-picture
 Deletes the chatbot's profile picture
 
 
