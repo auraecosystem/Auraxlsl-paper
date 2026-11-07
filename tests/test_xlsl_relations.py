@@ -60,7 +60,9 @@ class XLSLRelationalSchemaTests(unittest.TestCase):
 
     def test_requires_foreign_key_target_to_be_unique(self):
         book = self.workbook()
-        book["sheets"]["Orders"]["foreign_keys"][0]["references"]["columns"] = ["name"]
+        foreign_key = book["sheets"]["Orders"]["foreign_keys"][0]
+        foreign_key["columns"] = ["tenant"]
+        foreign_key["references"]["columns"] = ["name"]
         valid, report = validate_workbook(book)
         self.assertFalse(valid)
         self.assertTrue(any("primary key or unique column" in e for e in report["errors"]))
