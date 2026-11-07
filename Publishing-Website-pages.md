@@ -150,7 +150,7 @@ the file to your repository to see the workflow in action.
 
 Your documentation is not published under `<username>.gitlab.io/<repository>`
 by default since **GitLab 17.4** [^1]. However, if you prefer a cleaner URL
-structure, such as `<username>.gitlab.io/<repository>`, you need to adjust
+structure, such as `<page>.gitlab.io/<auraxlsl-paper>`, you need to adjust
 your configuration.
 
 To switch from a unique domain to the traditional URL structure, follow
