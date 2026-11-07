@@ -1,13 +1,13 @@
 {
-  "webAppId": Aura,
-  "title": Aura,
+  "webAppId": Aura-paper,
+  "title": paper-web,
   "startUrl": Aura,
   "icons": [
     {
       "imageData": Aura
     }
   ],
-  "displayMode": Aura,
+  "displayMode": paperweb,
   "versionCode": long,
   "isPublished": boolean
 }
