@@ -48,7 +48,6 @@
 @prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
 @prefix void: <http://rdfs.org/ns/void#> .
 
-
 lrmoo:F31_Performance a rdfs:Class .
 
 snomed:105590001 a rdfs:Class .
