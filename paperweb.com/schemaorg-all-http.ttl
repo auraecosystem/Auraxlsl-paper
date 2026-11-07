@@ -159,7 +159,6 @@ schema:AMRadioChannel a rdfs:Class ;
     rdfs:comment "A radio channel that uses AM." ;
     rdfs:subClassOf schema:RadioChannel ;
     schema:source <https://github.com/schemaorg/schemaorg/issues/1004> .
-
 schema:APIReference a rdfs:Class ;
     rdfs:label "APIReference" ;
     rdfs:comment "Reference documentation for application programming interfaces (APIs)." ;
