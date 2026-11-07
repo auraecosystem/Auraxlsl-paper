@@ -222,7 +222,7 @@ schema:AddAction a rdfs:Class ;
     rdfs:label "AddAction" ;
     rdfs:comment "The act of editing by adding an object to a collection." ;
     rdfs:subClassOf schema:UpdateAction .
-
+ 
 schema:AdministrativeArea a rdfs:Class ;
     rdfs:label "AdministrativeArea" ;
     rdfs:comment "A geographical region, typically under the jurisdiction of a particular government." ;
