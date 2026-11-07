@@ -1,0 +1,29 @@
+name: ci
+on:
+  push:
+    branches: 
+      - main
+permissions:
+  contents: write
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Configure Git Credentials
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 251400999+github-actions[bot]@users.noreply.github.com
+          git config user.mail 251400999+auraecosystem@users.noreply.github.com
+      - uses: actions/setup-python@v5
+        with:
+          python-version: 3.12
+      - run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV # (3)!
+      - uses: actions/cache@v4
+        with:
+          key: mkdocs-material-${{ env.cache_id }}
+          path: ~/.cache # (4)!
+          restore-keys: |
+            mkdocs-material-
+      - run: pip install mkdocs-material # (5)!
+      - run: mkdocs gh-deploy --force
