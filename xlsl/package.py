@@ -79,10 +79,18 @@ def _validate_workbook_shape(workbook: dict[str, Any]) -> None:
         if not isinstance(sheet, dict):
             raise XLSLFormatError(f"Sheet {sheet_name!r} must be an object")
         columns, rows = sheet.get("columns"), sheet.get("rows")
-        if not isinstance(columns, list) or not all(isinstance(c, str) and c for c in columns):
-            raise XLSLFormatError(f"Sheet {sheet_name!r} needs a string columns array")
-        if len(set(columns)) != len(columns):
-            raise XLSLFormatError(f"Sheet {sheet_name!r} has duplicate columns")
+        if not isinstance(columns, list):
+            raise XLSLFormatError(f"Sheet {sheet_name!r} columns must be an array")
+        column_names = []
+        for column in columns:
+            if isinstance(column, str) and column:
+                column_names.append(column)
+            elif isinstance(column, dict) and isinstance(column.get("name"), str) and column["name"]:
+                column_names.append(column["name"])
+            else:
+                raise XLSLFormatError(f"Sheet {sheet_name!r} has an invalid column definition")
+        if len(set(column_names)) != len(column_names):
+            raise XLSLFormatError(f"Sheet {sheet_name!r} has duplicate column names")
         if not isinstance(rows, list):
             raise XLSLFormatError(f"Sheet {sheet_name!r} rows must be an array")
         for row_number, row in enumerate(rows, start=1):
@@ -139,6 +147,10 @@ def read_xlsl(path: str | os.PathLike[str]) -> XLSLDocument:
         raise XLSLFormatError("File is not a valid XLSL ZIP package") from exc
     _validate_manifest(manifest)
     _validate_workbook_shape(workbook)
+    from .validation import validate_workbook
+    valid, report = validate_workbook(workbook)
+    if not valid:
+        raise XLSLFormatError(f"Workbook schema validation failed: {report['errors']}")
     return XLSLDocument(manifest=manifest, workbook=workbook, logic_modules=logic_modules)
 
 
@@ -147,6 +159,10 @@ def write_xlsl(document: XLSLDocument, path: str | os.PathLike[str]) -> Path:
     manifest = dict(document.manifest)
     _validate_manifest(manifest)
     _validate_workbook_shape(document.workbook)
+    from .validation import validate_workbook
+    valid, report = validate_workbook(document.workbook)
+    if not valid:
+        raise XLSLFormatError(f"Workbook schema validation failed: {report['errors']}")
     for name, source in document.logic_modules.items():
         _validate_member_name(name)
         if not name.startswith("logic/") or not name.endswith(".xsl"):
