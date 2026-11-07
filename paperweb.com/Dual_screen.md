@@ -1,9 +1,9 @@
-Perfect! Let’s make your app fully mirrored on dual screens, meaning the main Shell page with the glass tab bar, dynamic scroll effects, badges, and animations will appear exactly the same on the external display in real time.
+> Perfect! Let’s make it fully mirrored on dual screens, meaning the main Shell page with the glass tab bar, dynamic scroll effects, badges, and animations will appear exactly the same on the external display in real time.
 
 ⸻
 
 Dual-Screen Mirrored Glass Shell Renderer
-
+```cpp
 using System;
 using UIKit;
 using Xamarin.Forms;
@@ -154,7 +154,7 @@ namespace YourApp.iOS.Renderers
     }
 }
 
-
+```
 ⸻
 
 Key Features
@@ -172,7 +172,7 @@ Key Features
 ⸻
 
 Usage Example
-
+```cpp
 // Scroll updates
 void OnScrollChanged(object sender, ScrolledEventArgs e)
 {
@@ -187,7 +187,7 @@ renderer?.SelectTab(2);
 
 // Set badge
 renderer?.SetTabBadge(0, "7");
-
+```
 
 ⸻
 
