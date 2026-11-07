@@ -1,3 +1,4 @@
+
 ┌──────────────────────────────────────────────┐
 │ SCTM-for-Life Interactive Demo               │
 │ [Logo]   Domain: [Education ▼]  [Help ?]    │
@@ -41,6 +42,4 @@ Legend:
 - ⚡ Execution Console: structured JSON, results, AI feedback
 - Shorthand symbols auto-expand → metadata for AI
 - CDN references load reusable assets/formulas dynamicall
----
-
 
