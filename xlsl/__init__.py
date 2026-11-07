@@ -1,5 +1,15 @@
-"""XLSL v1 native package support. Importing this package never executes content."""
-from .package import XLSLDocument, XLSLFormatError, read_xlsl, write_xlsl
+"""XLSL native package, validation, and explicit schema migration APIs."""
+from .package import XLSLDocument, XLSLFormatError, read_xlsl, update_xlsl, write_xlsl
 from .validation import validate_workbook
+from .migrations import MigrationRegistry, MigrationResult
 
-__all__ = ["XLSLDocument", "XLSLFormatError", "read_xlsl", "write_xlsl", "validate_workbook"]
+__all__ = [
+    "XLSLDocument",
+    "XLSLFormatError",
+    "MigrationRegistry",
+    "MigrationResult",
+    "read_xlsl",
+    "update_xlsl",
+    "validate_workbook",
+    "write_xlsl",
+]
