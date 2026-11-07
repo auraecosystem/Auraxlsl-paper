@@ -4,7 +4,7 @@ import unittest
 import zipfile
 from pathlib import Path
 
-from src.xlsl import XLSLDocument, XLSLFormatError, read_xlsl, validate_workbook, write_xlsl
+from xlsl import XLSLDocument, XLSLFormatError, read_xlsl, validate_workbook, write_xlsl
 
 
 class XLSLPackageTests(unittest.TestCase):
