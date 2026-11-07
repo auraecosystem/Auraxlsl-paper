@@ -64,9 +64,12 @@ from xlsl import MigrationRegistry
 registry = MigrationRegistry()
 
 def add_metadata(workbook):
-    workbook["sheets"]["Customers"]["columns"].append(
+    sheet = workbook["sheets"]["Customers"]
+    sheet["columns"].append(
         {"name": "status", "type": "string", "nullable": True}
     )
+    for row in sheet["rows"]:
+        row.append(None)
 
 registry.register(1, 2, add_metadata)
 result = registry.migrate(workbook, 2)  # dry-run by default
