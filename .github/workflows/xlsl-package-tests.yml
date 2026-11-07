@@ -8,7 +8,7 @@ on:
       - ".github/workflows/xlsl-package-tests.yml"
   push:
     branches:
-      - "feature/xlsl-v1-package-foundation"
+      - "feature/xlsl-v1-package-foundation"\n      - "feature/xlsl-relations-migrations-v1"
     paths:
       - "xlsl/**"
       - "tests/test_xlsl_package.py"
