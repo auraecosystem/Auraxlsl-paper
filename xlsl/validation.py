@@ -23,7 +23,7 @@ def _column_spec(column: str | dict[str, Any]) -> dict[str, Any]:
     name, kind = column.get("name"), column.get("type")
     if not isinstance(name, str) or not name:
         raise XLSLFormatError("Typed column definitions require a non-empty name")
-    if kind not in SUPPORTED_TYPES:
+    if not isinstance(kind, str) or kind not in SUPPORTED_TYPES:
         raise XLSLFormatError(f"Column {name!r} has unsupported type {kind!r}")
     for flag in ("nullable", "unique"):
         if flag in column and not isinstance(column[flag], bool):
@@ -93,7 +93,11 @@ def validate_workbook(workbook: dict[str, Any]) -> tuple[bool, dict[str, Any]]:
 
     errors: list[str] = []
     for sheet_name, sheet in workbook["sheets"].items():
-        specs = [_column_spec(column) for column in sheet["columns"]]
+        try:
+            specs = [_column_spec(column) for column in sheet["columns"]]
+        except XLSLFormatError as exc:
+            errors.append(f"Sheet {sheet_name!r}: {exc}")
+            continue
         names = [spec["name"] for spec in specs]
         if len(set(names)) != len(names):
             errors.append(f"Sheet {sheet_name!r} has duplicate column names")
