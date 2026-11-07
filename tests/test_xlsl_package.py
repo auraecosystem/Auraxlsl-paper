@@ -4,7 +4,7 @@ import unittest
 import zipfile
 from pathlib import Path
 
-from xlsl import XLSLDocument, XLSLFormatError, read_xlsl, validate_workbook, write_xlsl
+from xlsl import XLSLDocument, XLSLFormatError, read_xlsl, update_xlsl, validate_workbook, write_xlsl
 
 
 class XLSLPackageTests(unittest.TestCase):
@@ -93,6 +93,34 @@ class XLSLPackageTests(unittest.TestCase):
         })
         self.assertFalse(valid)
         self.assertTrue(report["errors"])
+
+
+    def test_update_xlsl_atomically_persists_valid_workbook(self):
+        write_xlsl(self.document, self.path)
+
+        def add_row(workbook):
+            workbook["sheets"]["Measurements"]["rows"].append(["c", 3.5])
+
+        updated = update_xlsl(self.path, add_row)
+        loaded = read_xlsl(self.path)
+        self.assertEqual(updated.workbook, loaded.workbook)
+        self.assertEqual(len(loaded.workbook["sheets"]["Measurements"]["rows"]), 3)
+
+    def test_update_xlsl_preserves_original_on_validation_failure(self):
+        write_xlsl(self.document, self.path)
+        before = self.path.read_bytes()
+
+        def break_workbook(workbook):
+            workbook["sheets"]["Measurements"]["rows"].append(["wrong-width"])
+
+        with self.assertRaises(XLSLFormatError):
+            update_xlsl(self.path, break_workbook)
+        self.assertEqual(self.path.read_bytes(), before)
+
+    def test_update_xlsl_requires_callable(self):
+        write_xlsl(self.document, self.path)
+        with self.assertRaises(TypeError):
+            update_xlsl(self.path, None)
 
 
 if __name__ == "__main__":

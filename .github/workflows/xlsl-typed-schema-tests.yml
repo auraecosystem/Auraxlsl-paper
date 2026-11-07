@@ -6,11 +6,14 @@ on:
       - "xlsl/**"
       - "tests/test_xlsl_package.py"
       - "tests/test_xlsl_typed_schema.py"
+      - "tests/test_xlsl_relations.py"
+      - "tests/test_xlsl_migrations.py"
       - "docs/XLSL-V1-TYPED-SCHEMA.md"
       - ".github/workflows/xlsl-typed-schema-tests.yml"
   push:
     branches:
       - "feature/xlsl-typed-schema-v1"
+      - "feature/xlsl-relations-migrations-v1"
     paths:
       - "xlsl/**"
       - "tests/test_xlsl_package.py"
@@ -26,7 +29,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        python-version: [3.12]
+        python-version: ["3.10", "3.11", "3.12"]
     steps:
       - uses: actions/checkout@v7
       - uses: actions/setup-python@v3
@@ -36,3 +39,5 @@ jobs:
         run: |
           python -m unittest discover -s tests -p "test_xlsl_package.py" -v
           python -m unittest discover -s tests -p "test_xlsl_typed_schema.py" -v
+          python -m unittest discover -s tests -p "test_xlsl_relations.py" -v
+          python -m unittest discover -s tests -p "test_xlsl_migrations.py" -v

@@ -2,6 +2,7 @@
 from __future__ import annotations
 import json
 import os
+import copy
 import tempfile
 import zipfile
 from dataclasses import dataclass, field
@@ -196,3 +197,44 @@ def write_xlsl(document: XLSLDocument, path: str | os.PathLike[str]) -> Path:
             os.unlink(temporary_name)
         raise
     return destination
+
+
+
+def update_xlsl(
+    path: str | os.PathLike[str],
+    updater: Any,
+) -> XLSLDocument:
+    """Apply a workbook updater and atomically replace the package on success.
+
+    The updater receives a deep copy of the workbook. It may mutate that copy
+    and return None, or return a replacement workbook dictionary.
+    """
+    if not callable(updater):
+        raise TypeError("updater must be callable")
+    source = Path(path)
+    document = read_xlsl(source)
+    workbook = copy.deepcopy(document.workbook)
+    replacement = updater(workbook)
+    if replacement is not None:
+        if not isinstance(replacement, dict):
+            raise XLSLFormatError("Workbook updater must return a dictionary or None")
+        workbook = replacement
+
+    updated = XLSLDocument(
+        workbook=workbook,
+        manifest=copy.deepcopy(document.manifest),
+        logic_modules=copy.deepcopy(document.logic_modules),
+    )
+    temporary_name = None
+    try:
+        with tempfile.NamedTemporaryFile(
+            prefix=f".{source.name}.", suffix=".xlsl", dir=source.parent, delete=False
+        ) as temporary:
+            temporary_name = temporary.name
+        write_xlsl(updated, temporary_name)
+        os.replace(temporary_name, source)
+    except Exception:
+        if temporary_name and os.path.exists(temporary_name):
+            os.unlink(temporary_name)
+        raise
+    return updated
