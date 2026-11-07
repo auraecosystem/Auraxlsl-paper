@@ -1,6 +1,5 @@
 > # Delete chatbot icon
-Source: https://chatbase.co/docs/api-reference/assets/delete-chatbot-icon
-
+> Source: https://chatbase.co/docs/api-reference/assets/delete-chatbot-ico
 > openapi.yaml delete /delete-chatbot-icon
 Deletes the chatbot's icon image
 
