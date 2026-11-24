@@ -78,7 +78,7 @@ Use-Cases
 	•	Interoperability with Qiskit, Cirq, Rigetti simulators.
 	•	Teleportation experiment modeling.
 
-⸻
+⸻ 
 
 3. .xsim — Simulation Spreadsheet
 
