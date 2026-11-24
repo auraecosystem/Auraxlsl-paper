@@ -1,0 +1,1240 @@
+{
+ "cells": [
+  {
+   "cell_type": "markdown",
+   "id": "85409c47",
+   "metadata": {},
+   "source": [
+    "# LMLM — Large Multimodal Learning Model\n",
+    "## Intelligence, Orchestrated.\n",
+    "\n",
+    "**Technical Presentation Notebook · v1.0**\n",
+    "\n",
+    "This notebook presents LMLM as a model-agnostic intelligence orchestration architecture connecting multimodal inputs, specialized models, agents, memory, retrieval, tools, execution, policy, and verification."
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "71c0b6af",
+   "metadata": {},
+   "source": [
+    "### 3D Visual Overview\n",
+    "\n",
+    "![LMLM 3D presentation overview](assets/lmlm_3d_overview.png)\n"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 1,
+   "id": "6451c295",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-08-25T10:23:00.693743Z",
+     "iopub.status.busy": "2026-08-25T10:23:00.693567Z",
+     "iopub.status.idle": "2026-08-25T10:23:00.698301Z",
+     "shell.execute_reply": "2026-08-25T10:23:00.697807Z"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "LMLM layers: 7\n"
+     ]
+    }
+   ],
+   "source": [
+    "# LMLM reference architecture\n",
+    "lmlm = {\n",
+    "    \"input\": [\"text\", \"image\", \"audio\", \"video\", \"code\", \"documents\", \"data\", \"sensors\"],\n",
+    "    \"intelligence\": [\"task_understanding\", \"reasoning\", \"planning\"],\n",
+    "    \"coordination\": [\"model_registry\", \"capability_routing\", \"agent_orchestration\"],\n",
+    "    \"state\": [\"context\", \"working_memory\", \"long_term_memory\", \"project_state\"],\n",
+    "    \"action\": [\"tools\", \"apis\", \"code_execution\", \"cloud\", \"local\", \"edge\"],\n",
+    "    \"control\": [\"policy\", \"permissions\", \"verification\", \"recovery\"],\n",
+    "    \"output\": [\"result\", \"evidence\", \"status\", \"artifacts\"]\n",
+    "}\n",
+    "\n",
+    "print(\"LMLM layers:\", len(lmlm))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "afebce80",
+   "metadata": {},
+   "source": [
+    "# 01 — LMLM\n",
+    "## Large Multimodal Learning Model\n",
+    "\n",
+    "![3D illustration for 01 — LMLM](assets/illustration_01.png)\n",
+    "\n",
+    "**Concept**  \n",
+    "LMLM is an intelligent orchestration architecture for coordinating multimodal models, agents, memory, tools, execution, and verification.\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "33d112c4",
+   "metadata": {},
+   "source": [
+    "# 02 — The Problem\n",
+    "## Fragmented AI Landscape\n",
+    "\n",
+    "![3D illustration for 02 — The Problem](assets/illustration_02.png)\n",
+    "\n",
+    "**Concept**  \n",
+    "Modern AI capability is distributed across specialized models, tools, data stores, agents, and applications. The integration problem becomes a systems problem.\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "0852bf0f",
+   "metadata": {},
+   "source": [
+    "# 03 — The Vision\n",
+    "## Intelligence Orchestration\n",
+    "\n",
+    "![3D illustration for 03 — The Vision](assets/illustration_03.png)\n",
+    "\n",
+    "**Concept**  \n",
+    "LMLM provides a coordination layer that understands objectives, routes work, maintains state, invokes capabilities, and evaluates outcomes.\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "92da6baf",
+   "metadata": {},
+   "source": [
+    "# 04 — LMLM Core\n",
+    "## The Orchestration Runtime\n",
+    "\n",
+    "![3D illustration for 04 — LMLM Core](assets/illustration_04.png)\n",
+    "\n",
+    "**Concept**  \n",
+    "A model-agnostic core coordinates input processing, reasoning, routing, memory, tools, execution, verification, policy, state, and output.\n",
+    "\n",
+    "### Technical notes\n",
+    "\n",
+    "Treat the core as a runtime boundary rather than a single neural network. Adapters can expose heterogeneous model providers behind normalized capability interfaces.\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "1839bfcc",
+   "metadata": {},
+   "source": [
+    "# 05 — Multimodal Input\n",
+    "## All Modalities, One Pipeline\n",
+    "\n",
+    "![3D illustration for 05 — Multimodal Input](assets/illustration_05.png)\n",
+    "\n",
+    "**Concept**  \n",
+    "Text, images, audio, video, code, documents, structured data, and sensor information can enter a common task-processing pipeline.\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "0de71cc9",
+   "metadata": {},
+   "source": [
+    "# 06 — Task Understanding\n",
+    "## From Intent to Execution Graph\n",
+    "\n",
+    "![3D illustration for 06 — Task Understanding](assets/illustration_06.png)\n",
+    "\n",
+    "**Concept**  \n",
+    "LMLM interprets the objective, identifies constraints and dependencies, decomposes the work, and constructs an execution graph.\n",
+    "\n",
+    "### Technical notes\n",
+    "\n",
+    "Represent the plan as a DAG or stateful execution graph. Dependencies, parallelism, retries, timeouts, and completion criteria should be explicit.\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "7bba07b5",
+   "metadata": {},
+   "source": [
+    "# 07 — Model Registry\n",
+    "## Capability Discovery\n",
+    "\n",
+    "![3D illustration for 07 — Model Registry](assets/illustration_07.png)\n",
+    "\n",
+    "**Concept**  \n",
+    "Models register capabilities, modalities, context limits, latency, cost, locality, tool access, and other routing metadata.\n",
+    "\n",
+    "### Technical notes\n",
+    "\n",
+    "Capability metadata should support routing decisions: modality, context window, latency, cost, locality, reliability, tool access, and policy constraints.\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "1fc9d95c",
+   "metadata": {},
+   "source": [
+    "# 08 — Dynamic Routing\n",
+    "## Right Model, Right Task\n",
+    "\n",
+    "![3D illustration for 08 — Dynamic Routing](assets/illustration_08.png)\n",
+    "\n",
+    "**Concept**  \n",
+    "The router selects or composes model capabilities according to task requirements, policy, context, performance, and availability.\n",
+    "\n",
+    "### Technical notes\n",
+    "\n",
+    "Routing can be deterministic, score-based, learned, policy-constrained, or hybrid. Preserve the reason for a routing decision for observability.\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "55b39b25",
+   "metadata": {},
+   "source": [
+    "# 09 — Script.God\n",
+    "## Structured AI Coordination\n",
+    "\n",
+    "![3D illustration for 09 — Script.God](assets/illustration_08.png)\n",
+    "\n",
+    "**Concept**  \n",
+    "CONNECT, CAPABILITIES, TASK, ACK, CONTEXT, PROGRESS, RESULT, ERROR, BLOCKED, CANCEL, VERIFY, and SYNC form a structured coordination vocabulary.\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "81fc7402",
+   "metadata": {},
+   "source": [
+    "# 10 — Memory & Context\n",
+    "## Relevant Continuity\n",
+    "\n",
+    "![3D illustration for 10 — Memory & Context](assets/illustration_09.png)\n",
+    "\n",
+    "**Concept**  \n",
+    "Working context, long-term memory, project state, retrieved knowledge, and user context can be managed as distinct information layers.\n",
+    "\n",
+    "### Technical notes\n",
+    "\n",
+    "Separate transient working context from durable memory. Retrieval should be relevance- and authorization-aware rather than indiscriminately injecting history.\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "574a45e5",
+   "metadata": {},
+   "source": [
+    "# 11 — Retrieval\n",
+    "## Evidence Before Action\n",
+    "\n",
+    "![3D illustration for 11 — Retrieval](assets/illustration_09.png)\n",
+    "\n",
+    "**Concept**  \n",
+    "Retrieval can supply relevant documents, code, records, or knowledge to the reasoning loop while preserving provenance and task context.\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "e411025c",
+   "metadata": {},
+   "source": [
+    "# 12 — Tools & External Systems\n",
+    "## From Reasoning to Action\n",
+    "\n",
+    "![3D illustration for 12 — Tools & External Systems](assets/illustration_10.png)\n",
+    "\n",
+    "**Concept**  \n",
+    "LMLM can connect to repositories, APIs, databases, browsers, containers, CI/CD systems, cloud infrastructure, and other execution environments.\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "87cc7e0f",
+   "metadata": {},
+   "source": [
+    "# 13 — Agent Collaboration\n",
+    "## Many Experts, One Goal\n",
+    "\n",
+    "![3D illustration for 13 — Agent Collaboration](assets/illustration_11.png)\n",
+    "\n",
+    "**Concept**  \n",
+    "Specialized agents can research, design, implement, test, audit, and verify while the orchestration layer coordinates dependencies and shared state.\n",
+    "\n",
+    "### Technical notes\n",
+    "\n",
+    "Agents should communicate through structured task contracts and shared state rather than uncontrolled conversational coupling.\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "1838ab2b",
+   "metadata": {},
+   "source": [
+    "# 14 — Execution Loop\n",
+    "## Observe, Adapt, Succeed\n",
+    "\n",
+    "![3D illustration for 14 — Execution Loop](assets/illustration_12.png)\n",
+    "\n",
+    "**Concept**  \n",
+    "The runtime can receive, understand, decompose, execute, observe, evaluate, adapt, and verify rather than assuming a single-pass workflow.\n",
+    "\n",
+    "### Technical notes\n",
+    "\n",
+    "Execution should expose state transitions and events so the system can be monitored, replayed, cancelled, and recovered.\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "79fabf89",
+   "metadata": {},
+   "source": [
+    "# 15 — Error Recovery\n",
+    "## Failure Is a State\n",
+    "\n",
+    "![3D illustration for 15 — Error Recovery](assets/illustration_12.png)\n",
+    "\n",
+    "**Concept**  \n",
+    "Errors and blocked states become explicit execution states that can trigger diagnosis, recovery, retry, escalation, or cancellation.\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "6c748a6c",
+   "metadata": {},
+   "source": [
+    "# 16 — Verification\n",
+    "## Quality, Safety, Trust\n",
+    "\n",
+    "![3D illustration for 16 — Verification](assets/illustration_13.png)\n",
+    "\n",
+    "**Concept**  \n",
+    "Outputs can pass through fact checks, code tests, schema validation, security checks, consistency checks, source validation, and policy checks.\n",
+    "\n",
+    "### Technical notes\n",
+    "\n",
+    "Verification is multi-dimensional. A result can be syntactically valid but semantically wrong, so verification should test the actual acceptance criteria.\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "3725a70e",
+   "metadata": {},
+   "source": [
+    "# 17 — Policy & Permissions\n",
+    "## Controlled Capability\n",
+    "\n",
+    "![3D illustration for 17 — Policy & Permissions](assets/illustration_13.png)\n",
+    "\n",
+    "**Concept**  \n",
+    "Tool access, model selection, data access, execution privileges, and external actions should be constrained by explicit policy and authorization.\n",
+    "\n",
+    "### Technical notes\n",
+    "\n",
+    "Policy is a first-class control plane. Sensitive actions should require explicit authorization and least-privilege tool scopes.\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "fdf36351",
+   "metadata": {},
+   "source": [
+    "# 18 — Human + LMLM\n",
+    "## Amplifying Human Potential\n",
+    "\n",
+    "![3D illustration for 18 — Human + LMLM](assets/illustration_16.png)\n",
+    "\n",
+    "**Concept**  \n",
+    "Humans define objectives, provide judgment, review decisions, approve sensitive actions, and intervene when required.\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "8389619d",
+   "metadata": {},
+   "source": [
+    "# 19 — End-to-End Project\n",
+    "## Specification to Deployment\n",
+    "\n",
+    "![3D illustration for 19 — End-to-End Project](assets/illustration_14.png)\n",
+    "\n",
+    "**Concept**  \n",
+    "A complete project can be decomposed into research, architecture, implementation, testing, security, build, deployment, monitoring, and reporting.\n",
+    "\n",
+    "### Technical notes\n",
+    "\n",
+    "The end-to-end workflow demonstrates why orchestration matters: no single specialist needs to own the entire project lifecycle.\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "8af34289",
+   "metadata": {},
+   "source": [
+    "# 20 — Developer Integration\n",
+    "## LMLM + Codex / GitHub\n",
+    "\n",
+    "![3D illustration for 20 — Developer Integration](assets/illustration_10.png)\n",
+    "\n",
+    "**Concept**  \n",
+    "LMLM can orchestrate development workflows around repositories, issues, pull requests, code generation, testing, CI/CD, and verification.\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "0e5105fa",
+   "metadata": {},
+   "source": [
+    "# 21 — Local + Cloud + Edge\n",
+    "## Distributed Intelligence\n",
+    "\n",
+    "![3D illustration for 21 — Local + Cloud + Edge](assets/illustration_15.png)\n",
+    "\n",
+    "**Concept**  \n",
+    "Model capabilities can be distributed across local hardware, private infrastructure, cloud services, and edge devices.\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "f9551617",
+   "metadata": {},
+   "source": [
+    "# 22 — Ecosystem\n",
+    "## Everything Connected\n",
+    "\n",
+    "![3D illustration for 22 — Ecosystem](assets/illustration_15.png)\n",
+    "\n",
+    "**Concept**  \n",
+    "LMLM can act as a connective intelligence layer across AI models, agents, applications, data, infrastructure, automation, and human workflows.\n",
+    "\n",
+    "### Technical notes\n",
+    "\n",
+    "The ecosystem model allows LMLM to sit above heterogeneous infrastructure without requiring every capability to be implemented by the same vendor or model family.\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "73a7f843",
+   "metadata": {},
+   "source": [
+    "# 23 — Application Example\n",
+    "## Build a Complete Application\n",
+    "\n",
+    "![3D illustration for 23 — Application Example](assets/illustration_14.png)\n",
+    "\n",
+    "**Concept**  \n",
+    "A single objective can become a coordinated lifecycle: understand → design → code → test → secure → build → deploy → monitor → report.\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "e854f09b",
+   "metadata": {},
+   "source": [
+    "# 24 — Future\n",
+    "## The Intelligence Network\n",
+    "\n",
+    "![3D illustration for 24 — Future](assets/illustration_15.png)\n",
+    "\n",
+    "**Concept**  \n",
+    "The long-term direction is interoperable intelligence: composable models, coordinated agents, persistent context, tool use, verification, and adaptive execution.\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "e46952b7",
+   "metadata": {},
+   "source": [
+    "# 25 — Final\n",
+    "## Intelligence, Orchestrated.\n",
+    "\n",
+    "![3D illustration for 25 — Final](assets/illustration_01.png)\n",
+    "\n",
+    "**Concept**  \n",
+    "LMLM connects intelligence, coordinates capability, executes with purpose, and verifies outcomes.\n",
+    "\n"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "8435bc26",
+   "metadata": {},
+   "source": [
+    "# Implementation Roadmap\n",
+    "\n",
+    "**Phase 1 — Core Runtime:** task envelope, model adapters, capability registry, routing, state, events.\n",
+    "\n",
+    "**Phase 2 — Tooling:** GitHub, filesystem, databases, APIs, code execution, containers, CI/CD.\n",
+    "\n",
+    "**Phase 3 — Agent Coordination:** structured task contracts, Script.God protocol, shared context, progress reporting, cancellation and recovery.\n",
+    "\n",
+    "**Phase 4 — Memory & Retrieval:** working memory, durable project state, retrieval, provenance, permissions.\n",
+    "\n",
+    "**Phase 5 — Verification:** automated tests, evidence validation, security checks, policy enforcement, result scoring.\n",
+    "\n",
+    "**Phase 6 — Distributed LMLM:** local, cloud, and edge model execution with observability and resilient routing.\n",
+    "\n",
+    "## Closing principle\n",
+    "\n",
+    "> **LMLM is not defined by one model. It is defined by how intelligence is connected, coordinated, executed, and verified.**"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "33783989",
+   "metadata": {},
+   "source": [
+    "# Executable LMLM Demonstration\n",
+    "\n",
+    "The following cells turn the presentation into a runnable reference prototype.\n",
+    "\n",
+    "This is a local simulation of the LMLM orchestration lifecycle. It does not require API keys or external model providers. The same interfaces can later be replaced with real model adapters, GitHub, Supabase, local LLMs, cloud models, or other tools."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 2,
+   "id": "6ac423df",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-08-25T10:23:00.699847Z",
+     "iopub.status.busy": "2026-08-25T10:23:00.699739Z",
+     "iopub.status.idle": "2026-08-25T10:23:00.707989Z",
+     "shell.execute_reply": "2026-08-25T10:23:00.707485Z"
+    }
+   },
+   "outputs": [],
+   "source": [
+    "from dataclasses import dataclass, field\n",
+    "from typing import Any, Dict, List\n",
+    "from datetime import datetime\n",
+    "import json, time\n",
+    "\n",
+    "@dataclass\n",
+    "class Model:\n",
+    "    name: str\n",
+    "    capabilities: set\n",
+    "    locality: str = \"cloud\"\n",
+    "    score: float = 1.0\n",
+    "\n",
+    "@dataclass\n",
+    "class Task:\n",
+    "    id: str\n",
+    "    objective: str\n",
+    "    capability: str\n",
+    "    status: str = \"PENDING\"\n",
+    "    assigned_model: str | None = None\n",
+    "    result: Any = None\n",
+    "\n",
+    "@dataclass\n",
+    "class Event:\n",
+    "    type: str\n",
+    "    payload: Dict[str, Any]\n",
+    "    timestamp: str = field(default_factory=lambda: datetime.utcnow().isoformat() + \"Z\")\n",
+    "\n",
+    "class LMLMRuntime:\n",
+    "    def __init__(self):\n",
+    "        self.models: List[Model] = []\n",
+    "        self.events: List[Event] = []\n",
+    "        self.memory: Dict[str, Any] = {}\n",
+    "        self.tasks: List[Task] = []\n",
+    "\n",
+    "    def emit(self, event_type, **payload):\n",
+    "        event = Event(event_type, payload)\n",
+    "        self.events.append(event)\n",
+    "        print(f\"[{event_type}] {payload}\")\n",
+    "\n",
+    "    def register(self, model):\n",
+    "        self.models.append(model)\n",
+    "        self.emit(\"CAPABILITIES\", model=model.name, capabilities=sorted(model.capabilities))\n",
+    "\n",
+    "    def route(self, task):\n",
+    "        candidates = [m for m in self.models if task.capability in m.capabilities]\n",
+    "        if not candidates:\n",
+    "            raise RuntimeError(f\"No model supports capability: {task.capability}\")\n",
+    "        selected = max(candidates, key=lambda m: m.score)\n",
+    "        task.assigned_model = selected.name\n",
+    "        task.status = \"ROUTED\"\n",
+    "        self.emit(\"ROUTE\", task=task.id, model=selected.name, capability=task.capability)\n",
+    "        return selected\n",
+    "\n",
+    "    def execute(self, task):\n",
+    "        model = next(m for m in self.models if m.name == task.assigned_model)\n",
+    "        task.status = \"EXECUTING\"\n",
+    "        self.emit(\"TASK\", task=task.id, model=model.name)\n",
+    "        task.result = f\"{model.name} completed: {task.objective}\"\n",
+    "        task.status = \"RESULT\"\n",
+    "        self.emit(\"RESULT\", task=task.id, result=task.result)\n",
+    "        return task.result\n",
+    "\n",
+    "    def verify(self, task, checks):\n",
+    "        passed = all(check(task.result) for check in checks)\n",
+    "        task.status = \"VERIFIED\" if passed else \"ERROR\"\n",
+    "        self.emit(\"VERIFY\", task=task.id, passed=passed)\n",
+    "        return passed"
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 3,
+   "id": "acfcee1b",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-08-25T10:23:00.709243Z",
+     "iopub.status.busy": "2026-08-25T10:23:00.709137Z",
+     "iopub.status.idle": "2026-08-25T10:23:00.712455Z",
+     "shell.execute_reply": "2026-08-25T10:23:00.711921Z"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[CAPABILITIES] {'model': 'LMLM-Reasoner', 'capabilities': ['planning', 'reasoning']}\n",
+      "[CAPABILITIES] {'model': 'LMLM-Vision', 'capabilities': ['vision']}\n",
+      "[CAPABILITIES] {'model': 'LMLM-Coder', 'capabilities': ['code', 'testing']}\n",
+      "[CAPABILITIES] {'model': 'LMLM-Researcher', 'capabilities': ['research']}\n",
+      "[CAPABILITIES] {'model': 'LMLM-Local', 'capabilities': ['code', 'reasoning']}\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "/tmp/ipykernel_359/3931695040.py:26: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).\n",
+      "  timestamp: str = field(default_factory=lambda: datetime.utcnow().isoformat() + \"Z\")\n"
+     ]
+    }
+   ],
+   "source": [
+    "# Register heterogeneous capabilities.\n",
+    "runtime = LMLMRuntime()\n",
+    "\n",
+    "runtime.register(Model(\"LMLM-Reasoner\", {\"reasoning\", \"planning\"}, locality=\"cloud\", score=0.96))\n",
+    "runtime.register(Model(\"LMLM-Vision\", {\"vision\"}, locality=\"local\", score=0.91))\n",
+    "runtime.register(Model(\"LMLM-Coder\", {\"code\", \"testing\"}, locality=\"cloud\", score=0.95))\n",
+    "runtime.register(Model(\"LMLM-Researcher\", {\"research\"}, locality=\"cloud\", score=0.94))\n",
+    "runtime.register(Model(\"LMLM-Local\", {\"reasoning\", \"code\"}, locality=\"local\", score=0.89))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "cf3613e3",
+   "metadata": {},
+   "source": [
+    "## Script.God Coordination Trace\n",
+    "\n",
+    "The next cell demonstrates the coordination vocabulary used by the orchestration layer: `CONNECT`, `CAPABILITIES`, `TASK`, `ACK`, `CONTEXT`, `PROGRESS`, `RESULT`, `VERIFY`, `ERROR`, `BLOCKED`, `CANCEL`, and `SYNC`."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 4,
+   "id": "7d88222b",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-08-25T10:23:00.713828Z",
+     "iopub.status.busy": "2026-08-25T10:23:00.713727Z",
+     "iopub.status.idle": "2026-08-25T10:23:00.717937Z",
+     "shell.execute_reply": "2026-08-25T10:23:00.716854Z"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[CONNECT] {'runtime': 'LMLM-Core'}\n",
+      "[CAPABILITIES] {'registry': 5}\n",
+      "[TASK] {'objective': 'Analyze specification and prepare implementation plan'}\n",
+      "[ACK] {'accepted': True}\n",
+      "[CONTEXT] {'project': 'demo-app', 'memory_keys': []}\n",
+      "[PROGRESS] {'stage': 'routing'}\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "/tmp/ipykernel_359/3931695040.py:26: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).\n",
+      "  timestamp: str = field(default_factory=lambda: datetime.utcnow().isoformat() + \"Z\")\n"
+     ]
+    }
+   ],
+   "source": [
+    "def script_god_demo(runtime):\n",
+    "    protocol = [\n",
+    "        (\"CONNECT\", {\"runtime\": \"LMLM-Core\"}),\n",
+    "        (\"CAPABILITIES\", {\"registry\": len(runtime.models)}),\n",
+    "        (\"TASK\", {\"objective\": \"Analyze specification and prepare implementation plan\"}),\n",
+    "        (\"ACK\", {\"accepted\": True}),\n",
+    "        (\"CONTEXT\", {\"project\": \"demo-app\", \"memory_keys\": list(runtime.memory)}),\n",
+    "        (\"PROGRESS\", {\"stage\": \"routing\"}),\n",
+    "    ]\n",
+    "    for event_type, payload in protocol:\n",
+    "        runtime.emit(event_type, **payload)\n",
+    "\n",
+    "script_god_demo(runtime)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "5f2550f1",
+   "metadata": {},
+   "source": [
+    "## End-to-End Task Decomposition and Routing\n",
+    "\n",
+    "A single objective is decomposed into specialized tasks. Each task is routed to the best registered capability, executed, and then verified."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 5,
+   "id": "234f2792",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-08-25T10:23:00.719488Z",
+     "iopub.status.busy": "2026-08-25T10:23:00.719352Z",
+     "iopub.status.idle": "2026-08-25T10:23:00.724523Z",
+     "shell.execute_reply": "2026-08-25T10:23:00.723178Z"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[ROUTE] {'task': 'T1', 'model': 'LMLM-Reasoner', 'capability': 'reasoning'}\n",
+      "[TASK] {'task': 'T1', 'model': 'LMLM-Reasoner'}\n",
+      "[RESULT] {'task': 'T1', 'result': 'LMLM-Reasoner completed: Analyze requirements and constraints'}\n",
+      "[ROUTE] {'task': 'T2', 'model': 'LMLM-Researcher', 'capability': 'research'}\n",
+      "[TASK] {'task': 'T2', 'model': 'LMLM-Researcher'}\n",
+      "[RESULT] {'task': 'T2', 'result': 'LMLM-Researcher completed: Research implementation dependencies'}\n",
+      "[ROUTE] {'task': 'T3', 'model': 'LMLM-Coder', 'capability': 'code'}\n",
+      "[TASK] {'task': 'T3', 'model': 'LMLM-Coder'}\n",
+      "[RESULT] {'task': 'T3', 'result': 'LMLM-Coder completed: Implement the application core'}\n",
+      "[ROUTE] {'task': 'T4', 'model': 'LMLM-Coder', 'capability': 'testing'}\n",
+      "[TASK] {'task': 'T4', 'model': 'LMLM-Coder'}\n",
+      "[RESULT] {'task': 'T4', 'result': 'LMLM-Coder completed: Create and run automated tests'}\n",
+      "[VERIFY] {'task': 'T1', 'passed': True}\n",
+      "[VERIFY] {'task': 'T2', 'passed': True}\n",
+      "[VERIFY] {'task': 'T3', 'passed': True}\n",
+      "[VERIFY] {'task': 'T4', 'passed': True}\n",
+      "\n",
+      "FINAL TASK STATES\n",
+      "T1 VERIFIED -> LMLM-Reasoner\n",
+      "T2 VERIFIED -> LMLM-Researcher\n",
+      "T3 VERIFIED -> LMLM-Coder\n",
+      "T4 VERIFIED -> LMLM-Coder\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "/tmp/ipykernel_359/3931695040.py:26: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).\n",
+      "  timestamp: str = field(default_factory=lambda: datetime.utcnow().isoformat() + \"Z\")\n"
+     ]
+    }
+   ],
+   "source": [
+    "runtime.memory[\"project\"] = {\n",
+    "    \"name\": \"LMLM Demo Application\",\n",
+    "    \"requirements\": [\"multimodal input\", \"API integration\", \"automated tests\"]\n",
+    "}\n",
+    "\n",
+    "tasks = [\n",
+    "    Task(\"T1\", \"Analyze requirements and constraints\", \"reasoning\"),\n",
+    "    Task(\"T2\", \"Research implementation dependencies\", \"research\"),\n",
+    "    Task(\"T3\", \"Implement the application core\", \"code\"),\n",
+    "    Task(\"T4\", \"Create and run automated tests\", \"testing\"),\n",
+    "]\n",
+    "\n",
+    "for task in tasks:\n",
+    "    runtime.route(task)\n",
+    "    runtime.execute(task)\n",
+    "\n",
+    "checks = [\n",
+    "    lambda result: isinstance(result, str),\n",
+    "    lambda result: \"completed\" in result.lower(),\n",
+    "]\n",
+    "\n",
+    "for task in tasks:\n",
+    "    runtime.verify(task, checks)\n",
+    "\n",
+    "print(\"\\nFINAL TASK STATES\")\n",
+    "for task in tasks:\n",
+    "    print(task.id, task.status, \"->\", task.assigned_model)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "f023b73f",
+   "metadata": {},
+   "source": [
+    "## Tool Execution Simulation\n",
+    "\n",
+    "This demonstrates the action boundary. In production, these functions can be replaced with real connectors for GitHub, Supabase, databases, cloud infrastructure, browsers, containers, CI/CD, or other approved tools."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 6,
+   "id": "07c6e057",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-08-25T10:23:00.726203Z",
+     "iopub.status.busy": "2026-08-25T10:23:00.726093Z",
+     "iopub.status.idle": "2026-08-25T10:23:00.731653Z",
+     "shell.execute_reply": "2026-08-25T10:23:00.731109Z"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[TOOL_RESULT] {'tool': 'github', 'action': 'create_branch', 'repo': 'example/lmlm-demo', 'branch': 'lmlm/orchestration', 'status': 'simulated'}\n",
+      "[TOOL_RESULT] {'tool': 'executor', 'command': 'pytest -q', 'exit_code': 0, 'status': 'simulated-pass'}\n",
+      "[TOOL_RESULT] {'tool': 'deployment', 'target': 'staging', 'status': 'simulated'}\n"
+     ]
+    },
+    {
+     "name": "stderr",
+     "output_type": "stream",
+     "text": [
+      "/tmp/ipykernel_359/3931695040.py:26: DeprecationWarning: datetime.datetime.utcnow() is deprecated and scheduled for removal in a future version. Use timezone-aware objects to represent datetimes in UTC: datetime.datetime.now(datetime.UTC).\n",
+      "  timestamp: str = field(default_factory=lambda: datetime.utcnow().isoformat() + \"Z\")\n"
+     ]
+    }
+   ],
+   "source": [
+    "class ToolLayer:\n",
+    "    def github_create_branch(self, repo, branch):\n",
+    "        return {\"tool\": \"github\", \"action\": \"create_branch\", \"repo\": repo, \"branch\": branch, \"status\": \"simulated\"}\n",
+    "\n",
+    "    def run_tests(self, command):\n",
+    "        return {\"tool\": \"executor\", \"command\": command, \"exit_code\": 0, \"status\": \"simulated-pass\"}\n",
+    "\n",
+    "    def deploy(self, target):\n",
+    "        return {\"tool\": \"deployment\", \"target\": target, \"status\": \"simulated\"}\n",
+    "\n",
+    "tools = ToolLayer()\n",
+    "\n",
+    "tool_results = [\n",
+    "    tools.github_create_branch(\"example/lmlm-demo\", \"lmlm/orchestration\"),\n",
+    "    tools.run_tests(\"pytest -q\"),\n",
+    "    tools.deploy(\"staging\"),\n",
+    "]\n",
+    "\n",
+    "for result in tool_results:\n",
+    "    runtime.emit(\"TOOL_RESULT\", **result)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "cd43485f",
+   "metadata": {},
+   "source": [
+    "## Verification Gate\n",
+    "\n",
+    "Verification is treated as a first-class control point. A task does not become `VERIFIED` merely because a model generated output; it must satisfy explicit checks."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 7,
+   "id": "49a1c7ae",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-08-25T10:23:00.733045Z",
+     "iopub.status.busy": "2026-08-25T10:23:00.732934Z",
+     "iopub.status.idle": "2026-08-25T10:23:00.738677Z",
+     "shell.execute_reply": "2026-08-25T10:23:00.738069Z"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "{\n",
+      "  \"checks\": {\n",
+      "    \"all_tools_returned\": true,\n",
+      "    \"tests_passed\": true,\n",
+      "    \"deployment_completed\": true\n",
+      "  },\n",
+      "  \"verified\": true\n",
+      "}\n"
+     ]
+    },
+    {
+     "data": {
+      "text/plain": [
+       "True"
+      ]
+     },
+     "execution_count": 7,
+     "metadata": {},
+     "output_type": "execute_result"
+    }
+   ],
+   "source": [
+    "def verification_gate(results):\n",
+    "    checks = {\n",
+    "        \"all_tools_returned\": all(r.get(\"status\") for r in results),\n",
+    "        \"tests_passed\": any(r.get(\"exit_code\") == 0 for r in results),\n",
+    "        \"deployment_completed\": any(r.get(\"status\") == \"simulated\" for r in results),\n",
+    "    }\n",
+    "    passed = all(checks.values())\n",
+    "    print(json.dumps({\"checks\": checks, \"verified\": passed}, indent=2))\n",
+    "    return passed\n",
+    "\n",
+    "verification_gate(tool_results)"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "9da24fcf",
+   "metadata": {},
+   "source": [
+    "## Observability: Event Log\n",
+    "\n",
+    "The event stream provides a foundation for tracing, debugging, replay, auditing, and future distributed execution."
+   ]
+  },
+  {
+   "cell_type": "code",
+   "execution_count": 8,
+   "id": "26108428",
+   "metadata": {
+    "execution": {
+     "iopub.execute_input": "2026-08-25T10:23:00.739706Z",
+     "iopub.status.busy": "2026-08-25T10:23:00.739608Z",
+     "iopub.status.idle": "2026-08-25T10:23:00.742446Z",
+     "shell.execute_reply": "2026-08-25T10:23:00.741790Z"
+    }
+   },
+   "outputs": [
+    {
+     "name": "stdout",
+     "output_type": "stream",
+     "text": [
+      "[\n",
+      "  {\n",
+      "    \"type\": \"CAPABILITIES\",\n",
+      "    \"payload\": {\n",
+      "      \"model\": \"LMLM-Reasoner\",\n",
+      "      \"capabilities\": [\n",
+      "        \"planning\",\n",
+      "        \"reasoning\"\n",
+      "      ]\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.710541Z\"\n",
+      "  },\n",
+      "  {\n",
+      "    \"type\": \"CAPABILITIES\",\n",
+      "    \"payload\": {\n",
+      "      \"model\": \"LMLM-Vision\",\n",
+      "      \"capabilities\": [\n",
+      "        \"vision\"\n",
+      "      ]\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.710616Z\"\n",
+      "  },\n",
+      "  {\n",
+      "    \"type\": \"CAPABILITIES\",\n",
+      "    \"payload\": {\n",
+      "      \"model\": \"LMLM-Coder\",\n",
+      "      \"capabilities\": [\n",
+      "        \"code\",\n",
+      "        \"testing\"\n",
+      "      ]\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.710657Z\"\n",
+      "  },\n",
+      "  {\n",
+      "    \"type\": \"CAPABILITIES\",\n",
+      "    \"payload\": {\n",
+      "      \"model\": \"LMLM-Researcher\",\n",
+      "      \"capabilities\": [\n",
+      "        \"research\"\n",
+      "      ]\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.710689Z\"\n",
+      "  },\n",
+      "  {\n",
+      "    \"type\": \"CAPABILITIES\",\n",
+      "    \"payload\": {\n",
+      "      \"model\": \"LMLM-Local\",\n",
+      "      \"capabilities\": [\n",
+      "        \"code\",\n",
+      "        \"reasoning\"\n",
+      "      ]\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.710723Z\"\n",
+      "  },\n",
+      "  {\n",
+      "    \"type\": \"CONNECT\",\n",
+      "    \"payload\": {\n",
+      "      \"runtime\": \"LMLM-Core\"\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.714998Z\"\n",
+      "  },\n",
+      "  {\n",
+      "    \"type\": \"CAPABILITIES\",\n",
+      "    \"payload\": {\n",
+      "      \"registry\": 5\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.715024Z\"\n",
+      "  },\n",
+      "  {\n",
+      "    \"type\": \"TASK\",\n",
+      "    \"payload\": {\n",
+      "      \"objective\": \"Analyze specification and prepare implementation plan\"\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.715034Z\"\n",
+      "  },\n",
+      "  {\n",
+      "    \"type\": \"ACK\",\n",
+      "    \"payload\": {\n",
+      "      \"accepted\": true\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.715043Z\"\n",
+      "  },\n",
+      "  {\n",
+      "    \"type\": \"CONTEXT\",\n",
+      "    \"payload\": {\n",
+      "      \"project\": \"demo-app\",\n",
+      "      \"memory_keys\": []\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.715051Z\"\n",
+      "  },\n",
+      "  {\n",
+      "    \"type\": \"PROGRESS\",\n",
+      "    \"payload\": {\n",
+      "      \"stage\": \"routing\"\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.715064Z\"\n",
+      "  },\n",
+      "  {\n",
+      "    \"type\": \"ROUTE\",\n",
+      "    \"payload\": {\n",
+      "      \"task\": \"T1\",\n",
+      "      \"model\": \"LMLM-Reasoner\",\n",
+      "      \"capability\": \"reasoning\"\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.721020Z\"\n",
+      "  },\n",
+      "  {\n",
+      "    \"type\": \"TASK\",\n",
+      "    \"payload\": {\n",
+      "      \"task\": \"T1\",\n",
+      "      \"model\": \"LMLM-Reasoner\"\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.721059Z\"\n",
+      "  },\n",
+      "  {\n",
+      "    \"type\": \"RESULT\",\n",
+      "    \"payload\": {\n",
+      "      \"task\": \"T1\",\n",
+      "      \"result\": \"LMLM-Reasoner completed: Analyze requirements and constraints\"\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.721070Z\"\n",
+      "  },\n",
+      "  {\n",
+      "    \"type\": \"ROUTE\",\n",
+      "    \"payload\": {\n",
+      "      \"task\": \"T2\",\n",
+      "      \"model\": \"LMLM-Researcher\",\n",
+      "      \"capability\": \"research\"\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.721081Z\"\n",
+      "  },\n",
+      "  {\n",
+      "    \"type\": \"TASK\",\n",
+      "    \"payload\": {\n",
+      "      \"task\": \"T2\",\n",
+      "      \"model\": \"LMLM-Researcher\"\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.721091Z\"\n",
+      "  },\n",
+      "  {\n",
+      "    \"type\": \"RESULT\",\n",
+      "    \"payload\": {\n",
+      "      \"task\": \"T2\",\n",
+      "      \"result\": \"LMLM-Researcher completed: Research implementation dependencies\"\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.721098Z\"\n",
+      "  },\n",
+      "  {\n",
+      "    \"type\": \"ROUTE\",\n",
+      "    \"payload\": {\n",
+      "      \"task\": \"T3\",\n",
+      "      \"model\": \"LMLM-Coder\",\n",
+      "      \"capability\": \"code\"\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.721108Z\"\n",
+      "  },\n",
+      "  {\n",
+      "    \"type\": \"TASK\",\n",
+      "    \"payload\": {\n",
+      "      \"task\": \"T3\",\n",
+      "      \"model\": \"LMLM-Coder\"\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.721116Z\"\n",
+      "  },\n",
+      "  {\n",
+      "    \"type\": \"RESULT\",\n",
+      "    \"payload\": {\n",
+      "      \"task\": \"T3\",\n",
+      "      \"result\": \"LMLM-Coder completed: Implement the application core\"\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.721123Z\"\n",
+      "  },\n",
+      "  {\n",
+      "    \"type\": \"ROUTE\",\n",
+      "    \"payload\": {\n",
+      "      \"task\": \"T4\",\n",
+      "      \"model\": \"LMLM-Coder\",\n",
+      "      \"capability\": \"testing\"\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.721131Z\"\n",
+      "  },\n",
+      "  {\n",
+      "    \"type\": \"TASK\",\n",
+      "    \"payload\": {\n",
+      "      \"task\": \"T4\",\n",
+      "      \"model\": \"LMLM-Coder\"\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.721138Z\"\n",
+      "  },\n",
+      "  {\n",
+      "    \"type\": \"RESULT\",\n",
+      "    \"payload\": {\n",
+      "      \"task\": \"T4\",\n",
+      "      \"result\": \"LMLM-Coder completed: Create and run automated tests\"\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.721145Z\"\n",
+      "  },\n",
+      "  {\n",
+      "    \"type\": \"VERIFY\",\n",
+      "    \"payload\": {\n",
+      "      \"task\": \"T1\",\n",
+      "      \"passed\": true\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.721231Z\"\n",
+      "  },\n",
+      "  {\n",
+      "    \"type\": \"VERIFY\",\n",
+      "    \"payload\": {\n",
+      "      \"task\": \"T2\",\n",
+      "      \"passed\": true\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.721245Z\"\n",
+      "  },\n",
+      "  {\n",
+      "    \"type\": \"VERIFY\",\n",
+      "    \"payload\": {\n",
+      "      \"task\": \"T3\",\n",
+      "      \"passed\": true\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.721254Z\"\n",
+      "  },\n",
+      "  {\n",
+      "    \"type\": \"VERIFY\",\n",
+      "    \"payload\": {\n",
+      "      \"task\": \"T4\",\n",
+      "      \"passed\": true\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.721263Z\"\n",
+      "  },\n",
+      "  {\n",
+      "    \"type\": \"TOOL_RESULT\",\n",
+      "    \"payload\": {\n",
+      "      \"tool\": \"github\",\n",
+      "      \"action\": \"create_branch\",\n",
+      "      \"repo\": \"example/lmlm-demo\",\n",
+      "      \"branch\": \"lmlm/orchestration\",\n",
+      "      \"status\": \"simulated\"\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.729239Z\"\n",
+      "  },\n",
+      "  {\n",
+      "    \"type\": \"TOOL_RESULT\",\n",
+      "    \"payload\": {\n",
+      "      \"tool\": \"executor\",\n",
+      "      \"command\": \"pytest -q\",\n",
+      "      \"exit_code\": 0,\n",
+      "      \"status\": \"simulated-pass\"\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.729286Z\"\n",
+      "  },\n",
+      "  {\n",
+      "    \"type\": \"TOOL_RESULT\",\n",
+      "    \"payload\": {\n",
+      "      \"tool\": \"deployment\",\n",
+      "      \"target\": \"staging\",\n",
+      "      \"status\": \"simulated\"\n",
+      "    },\n",
+      "    \"timestamp\": \"2026-08-25T10:23:00.729299Z\"\n",
+      "  }\n",
+      "]\n"
+     ]
+    }
+   ],
+   "source": [
+    "print(json.dumps([\n",
+    "    {\"type\": e.type, \"payload\": e.payload, \"timestamp\": e.timestamp}\n",
+    "    for e in runtime.events\n",
+    "], indent=2))"
+   ]
+  },
+  {
+   "cell_type": "markdown",
+   "id": "61763ce1",
+   "metadata": {},
+   "source": [
+    "## Prototype Boundary\n",
+    "\n",
+    "This notebook intentionally uses deterministic local simulations.\n",
+    "\n",
+    "To turn it into production LMLM, replace the simulated interfaces with authenticated adapters for real models and tools, add persistent state, enforce policy and permissions, add timeouts/retries/cancellation, and connect the event stream to an observability system."
+   ]
+  }
+ ],
+ "metadata": {
+  "kernelspec": {
+   "display_name": "Python 3",
+   "language": "python",
+   "name": "python3"
+  },
+  "language_info": {
+   "codemirror_mode": {
+    "name": "ipython",
+    "version": 3
+   },
+   "file_extension": ".py",
+   "mimetype": "text/x-python",
+   "name": "python",
+   "nbconvert_exporter": "python",
+   "pygments_lexer": "ipython3",
+   "version": "3.13.5"
+  }
+ },
+ "nbformat": 4,
+ "nbformat_minor": 5
+}
