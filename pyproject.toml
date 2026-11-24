@@ -1,49 +1,21 @@
-[tool.poetry]
-name = "aura"
-version = "1.0.0-beta1-dev"
-description = "Automated Radio (AURA) is a free software suite for community radio stations."
-license = "AGPL-3.0-or-later"
-authors = ["many (tbd)"]
-maintainers = ["many (tbd)"]
-readme = "README.md"
-homepage = "https://aura.radio/"
-repository = "https://gitlab.servus.at/aura/aura"
-documentation = "https://docs.aura.radio/"
-keywords = [
-    "radio",
-    "podcast",
-    "broadcast",
-    "stream",
-    "fm",
-    "scheduling",
-    "audio",
-    "playout",
-    "media",
-     "podcast",
-    "television",
-    "cms",
-    "mam",
-    "mediaasset",
-    "community",
-]
-classifiers = [
-    "Topic :: Communications",
-    "Topic :: Internet :: WWW/HTTP :: Dynamic Content :: Content Management System",
-    "Topic :: Internet :: WWW/HTTP :: Site Management",
-    "Topic :: Office/Business :: Scheduling",
-    "Topic :: Multimedia :: Sound/Audio :: Conversion",
-    "Topic :: Multimedia :: Sound/Audio :: Mixers",
-    "Topic :: Multimedia :: Sound/Audio :: Players",
-]
-package-mode = false
-
-[tool.poetry.dependencies]
-python = "^3.10"
-codespell = "^2.2.1"
-pre-commit = "^3.1.1"
-tomli = "^2.0.1"
-
-
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "auraxlsl-paper"
+version = "0.1.0"
+description = "AuraXLSL scientific spreadsheets, notebooks, and quantum simulation tools"
+authors = [{ name = "Seriki walter Yakub" }]
+requires-python = ">=3.10"
+dependencies = ["numpy>=1.25", "pandas>=2.0", "openpyxl>=3.1"]
+
+[project.optional-dependencies]
+api = ["fastapi>=0.100", "uvicorn[standard]>=0.23", "pydantic>=2.0"]
+notebook = ["jupyter>=1.0", "matplotlib>=3.8"]
+science = ["scikit-learn>=1.3", "pyyaml>=6.0"]
+test = ["pytest>=7.0"]
+gpu = ["cupy"]
+
+[tool.setuptools.packages.find]
+include = ["AuraQuantum*", "api*"]
