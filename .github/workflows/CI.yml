@@ -1,41 +1,45 @@
 name: Python CI
-
-on: [push, pull_request]
-
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
 jobs:
-  build:
+  python:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v5
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: $PYTHON_VERSION
-    - name: Install dependencies
-      run: pip install openpyxl pandas
-    - name: Test scripts
-      run: |
-        python ai/engine.py
-        python simutations/teleport_sim.ipynb
-
-lint-with-PSScriptAnalyzer:
-    name: Install and run PSScriptAnalyzer
+      - uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - name: Install test dependencies
+        run: |
+          python -m pip install --upgrade pip
+          python -m pip install numpy pytest
+      - name: Compile core modules
+        run: python -m compileall -q AuraQuantum api circuits.py
+      - name: Run tests
+        run: python -m pytest -q
+  powershell-lint:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v5
-      - name: Install PSScriptAnalyzer module
+      - uses: actions/checkout@v4
+      - name: Install PSScriptAnalyzer
         shell: pwsh
         run: |
           Set-PSRepository PSGallery -InstallationPolicy Trusted
           Install-Module PSScriptAnalyzer -ErrorAction Stop
-      - name: Lint with PSScriptAnalyzer
+      - name: Lint PowerShell scripts
         shell: pwsh
         run: |
-          Invoke-ScriptAnalyzer -Path *.ps1 -Recurse -Outvariable issues
-          $errors   = $issues.Where({$_.Severity -eq 'Error'})
-          $warnings = $issues.Where({$_.Severity -eq 'Warning'})
-          if ($errors) {
-              Write-Error "There were $($errors.Count) errors and $($warnings.Count) warnings total." -ErrorAction Stop
-          } else {
-              Write-Output "There were $($errors.Count) errors and $($warnings.Count) warnings total."
+          $scripts = Get-ChildItem -Path . -Filter *.ps1 -Recurse
+          if ($scripts) {
+            $issues = $scripts | ForEach-Object { Invoke-ScriptAnalyzer -Path $_.FullName }
+            $errors = @($issues | Where-Object { $_.Severity -eq 'Error' })
+            if ($errors.Count -gt 0) {
+              $errors | Format-Table
+              throw "PSScriptAnalyzer found $($errors.Count) errors."
+            }
           }

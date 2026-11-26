@@ -1,116 +1,106 @@
+"""State-vector quantum circuit simulator with optional CuPy acceleration.
+Qubit 0 is the most-significant bit. The targets list defines local gate order.
+"""
+from __future__ import annotations
 import numpy as np
-
 try:
     import cupy as cp
-    xp = cp  # GPU acceleration if available
 except ImportError:
-    xp = np  # fallback to CPU
+    cp = None
+xp = cp if cp is not None else np
 
 class AuraQuantumCircuit:
-    def __init__(self, n_qubits):
+    def __init__(self, n_qubits: int):
+        if isinstance(n_qubits, bool) or not isinstance(n_qubits, int) or n_qubits < 1:
+            raise ValueError("n_qubits must be a positive integer")
         self.n = n_qubits
         self.state = xp.zeros(2**n_qubits, dtype=xp.complex128)
-        self.state[0] = 1.0  # Initialize |00...0>
+        self.state[0] = 1.0
 
-    # -------------------------
-    # Utility Methods
-    # -------------------------
     def normalize(self):
         norm = xp.linalg.norm(self.state)
-        if norm != 0:
-            self.state /= norm
+        scalar = norm.get() if hasattr(norm, "get") else norm
+        if float(scalar) == 0.0:
+            raise ValueError("Cannot normalize a zero state vector")
+        self.state /= norm
+        return self.state
 
     def measure(self):
-        probs = xp.abs(self.state) ** 2
-        outcome = xp.random.choice(len(probs), p=probs.get() if xp == cp else probs)
-        collapsed = xp.zeros_like(self.state)
-        collapsed[outcome] = 1
-        self.state = collapsed
+        probabilities = xp.abs(self.state) ** 2
+        if hasattr(probabilities, "get"):
+            probabilities = probabilities.get()
+        probabilities = np.asarray(probabilities, dtype=float)
+        total = probabilities.sum()
+        if not np.isfinite(total) or total <= 0:
+            raise ValueError("State vector has invalid measurement probabilities")
+        probabilities /= total
+        outcome = int(np.random.choice(probabilities.size, p=probabilities))
+        self.state = xp.zeros_like(self.state)
+        self.state[outcome] = 1.0
         return outcome
 
     def save_state(self, filename):
-        arr = self.state.get() if xp == cp else self.state
-        np.save(filename, arr)
+        state = self.state.get() if hasattr(self.state, "get") else self.state
+        np.save(filename, state)
 
     def load_state(self, filename):
-        arr = np.load(filename)
-        self.state = xp.array(arr, dtype=xp.complex128)
+        state = np.load(filename)
+        if state.ndim != 1 or state.size != 2**self.n:
+            raise ValueError(f"State must be a vector of length {2**self.n}")
+        self.state = xp.asarray(state, dtype=xp.complex128)
+        return self.state
 
     def tensor_product(self, *states):
-        result = states[0]
-        for s in states[1:]:
-            result = xp.kron(result, s)
+        if not states:
+            raise ValueError("At least one state is required")
+        result = xp.asarray(states[0])
+        for state in states[1:]:
+            result = xp.kron(result, xp.asarray(state))
         return result
 
-    # -------------------------
-    # Gate Builders
-    # -------------------------
     @staticmethod
     def hadamard_gate():
-        return (1/np.sqrt(2)) * xp.array([[1,1],[1,-1]], dtype=xp.complex128)
-
+        return xp.asarray([[1, 1], [1, -1]], dtype=xp.complex128) / np.sqrt(2)
     @staticmethod
     def pauli_x_gate():
-        return xp.array([[0,1],[1,0]], dtype=xp.complex128)
-
+        return xp.asarray([[0, 1], [1, 0]], dtype=xp.complex128)
     @staticmethod
     def pauli_y_gate():
-        return xp.array([[0,-1j],[1j,0]], dtype=xp.complex128)
-
+        return xp.asarray([[0, -1j], [1j, 0]], dtype=xp.complex128)
     @staticmethod
     def pauli_z_gate():
-        return xp.array([[1,0],[0,-1]], dtype=xp.complex128)
-
+        return xp.asarray([[1, 0], [0, -1]], dtype=xp.complex128)
     @staticmethod
     def cnot_gate():
-        return xp.array([[1,0,0,0],
-                         [0,1,0,0],
-                         [0,0,0,1],
-                         [0,0,1,0]], dtype=xp.complex128)
-
+        return xp.asarray([[1, 0, 0, 0], [0, 1, 0, 0],
+                           [0, 0, 0, 1], [0, 0, 1, 0]],
+                          dtype=xp.complex128)
     @staticmethod
     def toffoli_gate():
-        g = xp.eye(8, dtype=xp.complex128)
-        g[6,6], g[7,7] = 0,0
-        g[6,7], g[7,6] = 1,1
-        return g
+        gate = xp.eye(8, dtype=xp.complex128)
+        gate[6, 6] = gate[7, 7] = 0
+        gate[6, 7] = gate[7, 6] = 1
+        return gate
 
-    # -------------------------
-    # Gate Application
-    # -------------------------
     def apply_single_qubit_gate(self, gate, target):
-        full_gate = xp.array([[1]], dtype=xp.complex128)
-        for i in range(self.n):
-            full_gate = xp.kron(full_gate, gate if i == target else xp.eye(2, dtype=xp.complex128))
-        self.state = full_gate @ self.state
+        return self.apply_multi_qubit_gate(gate, [target])
 
     def apply_multi_qubit_gate(self, gate_matrix, targets):
-        full_gate = xp.eye(1, dtype=xp.complex128)
-        t_set = set(targets)
-        target_idx = 0
-        for i in range(self.n):
-            if i in t_set:
-                dim = gate_matrix.shape[0] if target_idx == 0 else 1
-                full_gate = xp.kron(full_gate, gate_matrix if target_idx == 0 else xp.eye(dim, dtype=xp.complex128))
-                target_idx += 1
-            else:
-                full_gate = xp.kron(full_gate, xp.eye(2, dtype=xp.complex128))
-        self.state = full_gate @ self.state
-
-function saveCircuit(filename="circuit.json") {
-    const data = JSON.stringify(circuit, null, 2);
-    const blob = new Blob([data], {type: "application/json"});
-    const a = document.createElement("a");
-    a.href = URL.createObjectURL(blob);
-    a.download = filename;
-    a.click();
-}
-
-function loadCircuit(file) {
-    const reader = new FileReader();
-    reader.onload = e => {
-        circuit = JSON.parse(e.target.result);
-        renderCircuit();
-    };
-    reader.readAsText(file);
-}
+        targets = list(targets)
+        if not targets or len(set(targets)) != len(targets):
+            raise ValueError("targets must be non-empty and contain unique indices")
+        if any(isinstance(t, bool) or not isinstance(t, int) or t < 0 or t >= self.n for t in targets):
+            raise ValueError(f"targets must be between 0 and {self.n - 1}")
+        gate = xp.asarray(gate_matrix, dtype=xp.complex128)
+        local_dim = 2 ** len(targets)
+        if gate.shape != (local_dim, local_dim):
+            raise ValueError(f"Gate for {len(targets)} targets must have shape ({local_dim}, {local_dim})")
+        remaining = [axis for axis in range(self.n) if axis not in targets]
+        permutation = targets + remaining
+        inverse = np.argsort(permutation).tolist()
+        tensor = self.state.reshape((2,) * self.n)
+        arranged = xp.transpose(tensor, axes=permutation).reshape((local_dim, -1))
+        transformed = gate @ arranged
+        restored = xp.transpose(transformed.reshape((2,) * self.n), axes=inverse)
+        self.state = restored.reshape(-1)
+        return self.state
