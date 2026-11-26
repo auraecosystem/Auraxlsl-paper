@@ -22,9 +22,9 @@ tags:
   - Scientific Computing
   - GPU Acceleration
 
-notebookxlsl:
+noteboolmlm:
 quantum:
-model:
+model: GLM4.7
 sentence:
 similarity:
 textgeneration:
