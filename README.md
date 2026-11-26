@@ -14,14 +14,14 @@ pages: "https://fastapi.com"
 projectstructure:
 synthetic:
 extension:
-tags:
+tags: https://fastai1.core.ai/
   - AuraXLSL
   - Quantum Computing
   - Machine Learning
   - AI
   - Scientific Computing
   - GPU Acceleration
-
+  -
 noteboolmlm:
 quantum:
 model: GLM4.7
