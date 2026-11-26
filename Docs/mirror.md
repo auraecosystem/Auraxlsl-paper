@@ -134,7 +134,7 @@ Listens for UIScreen.DidConnectNotification and DidDisconnectNotification.
 ⸻
 
 Usage Example
-
+```cpp
 // When tab changes
 Shell.Current.CurrentItemChanged += (s, e) =>
 {
