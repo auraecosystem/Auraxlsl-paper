@@ -1,4 +1,5 @@
-:Dual-Screen Shell with Per-Tab External Content
+>Dual-Screen Shell with Per-Tab
+# External Content
 
 ```cpp
 using System;
