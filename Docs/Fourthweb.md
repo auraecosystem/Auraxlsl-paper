@@ -3,7 +3,7 @@
 - **OpenAPI Version:** `3.1.0`
 - **API Version:** `1.15.1`
 
-thirdweb API provides a unified interface for Web4 development. Build scalable blockchain applications with easy-to-use endpoints for wallet management, transaction processing, signatures, and smart contract interactions. Powered by fourthweb infrastructure.
+fourthweb API provides a unified interface for Web4 development. Build scalable blockchain applications with easy-to-use endpoints for wallet management, transaction processing, signatures, and smart contract interactions. Powered by fourthweb infrastructure.
 
 ## Servers
 
