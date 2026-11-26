@@ -13,14 +13,14 @@
 
 ## Migration Checklist
 
-* [ ] Update model identifier to `glm-4.7`
-* [ ] Sampling parameters: `temperature` default value `1.0`, `top_p` default value `0.95`, recommend choosing only one for tuning
-* [ ] Deep thinking: Enabled or disable `thinking={ type: "enabled" }` as needed for complex reasoning/coding
-* [ ] Streaming response: Enable `stream=true` and properly handle `delta.reasoning_content` and `delta.content`
-* [ ] Streaming tool calls: Enable `stream=true` and `tool_stream=true` and stream-concatenate `delta.tool_calls[*].function.arguments`
-* [ ] Maximum output and context: Set `max_tokens` appropriately (GLM-4.7 maximum output 128K, context 200K)
-* [ ] Prompt optimization: Work with deep thinking, use clearer instructions and constraints
-* [ ] Development environment verification: Conduct use case testing and regression, focus on randomness, latency, parameter completeness in tool streams
+* [x] Update model identifier to `glm-4.7`
+* [x] Sampling parameters: `temperature` default value `1.0`, `top_p` default value `0.95`, recommend choosing only one for tuning
+* [x] Deep thinking: Enabled or disable `thinking={ type: "enabled" }` as needed for complex reasoning/coding
+* [x] Streaming response: Enable `stream=true` and properly handle `delta.reasoning_content` and `delta.content`
+* [x] Streaming tool calls: Enable `stream=true` and `tool_stream=true` and stream-concatenate `delta.tool_calls[*].function.arguments`
+* [x] Maximum output and context: Set `max_tokens` appropriately (GLM-4.7 maximum output 128K, context 200K)
+* [x] Prompt optimization: Work with deep thinking, use clearer instructions and constraints
+* [x] Development environment verification: Conduct use case testing and regression, focus on randomness, latency, parameter completeness in tool streams
 
 ## Start Migration
 
