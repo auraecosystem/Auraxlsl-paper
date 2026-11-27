@@ -1,0 +1,15 @@
+WORKBOOK "LMLM_Training"
+
+SHEET "Experiments"
+
+MODEL = "LMLM-Core"
+DATASET = "training_dataset"
+
+TRAIN MODEL:
+    EPOCHS = 10
+    BATCH_SIZE = 32
+    LEARNING_RATE = 0.0001
+
+    EXECUTE
+    EVALUATE
+    SAVE_CHECKPOINT
