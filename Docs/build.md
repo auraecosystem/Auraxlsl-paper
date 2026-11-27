@@ -416,3 +416,135 @@ Execution sequence:
 - A new repository.
 
 I will inspect before modifying anything and preserve existing functionality.
+
+Yes. In fact, I recommend making **Aura Xlsl completely standalone**.
+
+It should operate as an independent spreadsheet engine, not depend on Microsoft Excel, Google Sheets, or another spreadsheet application.
+
+## **Proposed standalone architecture**
+
+# **Aura Xlsl**
+
+Standalone architecture
+
+Independent spreadsheet platform
+
+**Aura Xlsl Application**
+
+Interface · Workbook Editor · Visualization
+
+Workbook Engine
+
+Formula Engine
+
+Calculation Runtime
+
+Linked Tables
+
+Query Engine
+
+AI Integration
+
+Model Training
+
+Analytics Engine
+
+**Native Storage Layer**
+
+`.xlsl` · `.xlog` · `.xsim` · `.xquant` · `.xdim` · `.xphilo`
+
+## **Standalone capabilities**
+
+1. Independent workbook creation and editing.
+2. Native formula language and calculation engine.
+3. Local-first storage and offline operation.
+4. Charts, pivot analysis and visualization.
+5. Database-style linked tables and queries.
+6. AI-assisted data analysis.
+7. Model training and experiment tracking.
+8. Plugin and extension architecture.
+9. Import/export interoperability.
+10. Independent APIs and automation.
+
+## **My architectural recommendation**
+
+Build Aura Xlsl as three independent layers:
+
+- **Aura Xlsl Core:** workbook format, parser, calculation engine and storage.
+- **Aura Xlsl Runtime:** execution, automation, extensions and AI integration.
+- **Aura Xlsl Studio:** desktop/web interface, dashboards and visualization.
+
+This makes Aura Xlsl an independent software product within the Aura ecosystem.
+
+**One important design decision:** Should Aura Xlsl also include its own programming language and execution environment, so users can write scripts, automate workbooks and build applications directly inside it?
+
+We'll create an **All-in-One LMLM Spreadsheet Workspace**, covering your business, projects, finances, research, and model training.
+
+The spreadsheet will be organized into interconnected worksheets.
+
+## **Proposed spreadsheet structure**
+
+| Worksheet          | Purpose                                     |
+| ------------------ | ------------------------------------------- |
+| Dashboard          | Overall KPIs, charts and progress           |
+| Project Management | Projects, milestones, deadlines             |
+| Tasks              | Assignments, priorities and status          |
+| Business           | Operations, customers and revenue           |
+| Finance            | Income, expenses, budgets and cash flow     |
+| Inventory          | Products, stock and suppliers               |
+| Crypto Portfolio   | Assets, holdings and transactions           |
+| AI Research        | Research papers, experiments and findings   |
+| Model Training     | Training runs, configurations and results   |
+| Datasets           | Dataset registry, versions and quality      |
+| Model Registry     | Model versions, checkpoints and metadata    |
+| Evaluation         | Benchmarks, accuracy, loss and performance  |
+| Compute Resources  | CPU, GPU, RAM and training costs            |
+| Deployment         | Model deployments, endpoints and monitoring |
+| Reports            | Consolidated analytics                      |
+
+## **Model training management**
+
+The training section will track:
+
+- Model architecture and parameters
+- Base model and tokenizer
+- Dataset and preprocessing
+- Training/validation split
+- Epochs, batch size and learning rate
+- Optimizer and scheduler
+- Training loss and validation loss
+- GPU/CPU utilization
+- Checkpoint locations
+- Evaluation metrics
+- Experiment comparisons
+- Training status and deployment readiness
+
+## **One important question**
+
+**How should we build the spreadsheet?**
+
+1\. Preferred format
+
+Excel (.xlsx)
+
+CSV files
+
+Google Sheets compatible
+
+2\. Spreadsheet functionality
+
+Basic tables and formulas
+
+Advanced formulas, dashboards and charts
+
+Advanced automation and analytics
+
+3\. Model training scope
+
+LMLM only
+
+LMLM + other AI models
+
+All machine learning and deep learning models
+
+>continue
